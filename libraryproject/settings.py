@@ -54,10 +54,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'libraryproject.urls'
 
+#### from lecture 3 
+import os 
+BASE_DIR = Path(__file__).parent.parent # to the root folder
+TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "templates")
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
