@@ -1,0 +1,22 @@
+{% extends "layouts/base.html" %}
+ 
+{% load static %}
+ 
+{% block title %} My First Index HTML Page {% endblock title %}
+ 
+{% block content %}
+
+    <h1>List of Books</h1>
+    <a href="{% url 'books.view_one_book' bookId=123 %}"><h2> Harry Potter and the deadly hallows</h2></a>
+    <a href="{% url 'books.view_one_book' bookId=123 %}"><img src="{% static 'book1.jpg' %}" alt="Book1 img desc" width="200" height="200"></a>
+    <hr>
+ 
+    <h2> Harry Potter and the order of the phoenix</h2>
+    <img src="{% static 'book2.jpg' %}" alt="Book2 img desc" width="200" height="200">
+    <hr>
+ 
+    <h2> Harry Potter and the philosopher's stone </h2>
+    <img src="{% static 'book3.jpg' %}" alt="Book3 img desc" width="200" height="200">
+    <hr>
+
+{% endblock content %}

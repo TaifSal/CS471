@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+ 
+{% load static %}
+ 
+{% block title %} My First Index HTML Page {% endblock title %}
+ 
+{% block content %}
+
+<h1>Details of Book1</h1>
+<h2>Harry Potter and the deadly hallows</h2>
+<h2>Author: JK rowling</h2>
+<p><strong> Harry Potter and the deadly hallows</strong> is the seventh and th final novel in harry potter series</p>
+ 
+<img src="{% static 'book1.jpg' %}" alt="Book1 img desc" width="200" height="200">
+
+{% endblock content %}
