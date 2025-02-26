@@ -1,10 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# lab-3
-#def index(request):
-#    name = request.GET.get("name") or "world!"
-#    return render(request, "bookmodule/index.html" , {"name": name})
 def index2(request, val1=0):
    return render(request, "bookmodule/index2.html", {"value": val1})
 
@@ -31,4 +27,11 @@ def viewbook(request, bookId):
 def about_us(request):
     return render(request, 'bookmodule/about_us.html')
 
+### Lab-5
+def lab5(request):
+    return render(request, 'bookmodule/lab5.html')
 
+# lab-3
+#def index(request):
+#    name = request.GET.get("name") or "world!"
+#    return render(request, "bookmodule/index.html" , {"name": name})

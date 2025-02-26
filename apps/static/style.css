@@ -17,4 +17,133 @@
 .topnav a.active{
     color: #008CBA;
 }
-  
+
+/* Lab-5 styling */
+.lab5_body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+}
+/* Task 1 */
+/* link 1*/
+#lab5_style_links_1  {
+  display: block;
+  padding: 10px;
+  margin: 5px;
+  text-decoration: none;
+  background-color: #95cfa7;
+  color: white;
+  border-radius: 5px;
+}
+
+#lab5_style_links_1 :hover {
+  background-color: #72a374;
+}
+
+#lab5_style_links_1 :visited {
+  color: #800080;
+}
+
+#lab5_style_links_1 :active {
+  background-color: #ff6600;
+}
+
+/* Link 2*/
+#lab5_style_links_2 {
+  display: block;
+  padding: 10px;
+  margin: 5px;
+  text-decoration: none;
+  background-color: #edcced;
+  color: white;
+  border-radius: 5px;
+}
+#lab5_style_links_2 :hover {
+  background-color: #d2a6d4;
+}
+#lab5_style_links_2 :visited {
+  color: #800080;
+}
+#lab5_style_links_2 :active {
+  background-color: #ff6600;
+}
+
+/* Link 3*/
+#lab5_style_links_3  {
+  display: block;
+  padding: 10px;
+  margin: 5px;
+  text-decoration: none;
+  background-color: #bedafc;
+  color: white;
+  border-radius: 5px;
+}
+#lab5_style_links_3 :hover {
+  background-color: #94c4dc;
+}
+#lab5_style_links_3 :visited {
+  color: #800080;
+}
+#lab5_style_links_3 :active {
+  background-color: #ff6600;
+}
+
+/* Task 2 */
+h1 {
+  font-size: 24px;
+  color: #444;
+  text-decoration: underline;
+}
+#F1 {
+  font-weight: bold;
+}
+#F2 {
+  font-style: italic;
+}
+#F3 {
+  text-decoration: line-through;
+}
+#F4 {
+  text-transform: uppercase;
+}
+#F5 {
+  color: #ffffff;
+  background-color: rgb(94, 27, 139);
+}
+
+/* Task 3 */
+#lab5_listing ul {
+  list-style-type: square;
+  list-style-position: inside; 
+  text-align: center; 
+  padding: 0; 
+  margin: 0 auto; 
+  display: block;
+}
+#lab5_listing ul ul {
+  list-style-type: circle;
+  margin-left: 20px;
+}
+
+/* Task 4 */
+table {
+  width: 50%;
+  margin: auto;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid black;
+  padding: 10px;
+}
+th {
+  background-color: #333;
+  color: white;
+}
+.language {
+  background-color: #f2f2f2;
+}
+.framework {
+  background-color: #d9edf7;
+}

@@ -12,5 +12,7 @@ urlpatterns = [
     path('list_books/', views.list_books, name= "books.list_books"),
     path('<int:bookId>/', views.viewbook, name="books.view_one_book"),
     path('about_us/', views.about_us, name="books.about_us"),
+    #lab 5
+    path('lab5/', views.lab5, name='books.lab5')
 ]
 

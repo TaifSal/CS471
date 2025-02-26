@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">   
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Lab 5 </title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+    
+</head>
+<div class="lab5_body"> 
+<body>
+
+    <!-- Task 1 -->
+    <section id="lab5_links">
+        <h2> Universities in Qassim region</h2>
+        <p>Click the links below:</p>
+        <div>
+            <a id="lab5_style_links_1" href="https://qu.edu.sa/" target="_blank" > <p> Qassim University </p> </a>
+            <a id="lab5_style_links_2" href="https://www.oc.edu.sa/ar" target="_blank"> <p> Onaizah University </p> </a>
+            <a id="lab5_style_links_3" href="https://sr.edu.sa/" target="_blank"> <p> Alrajhi University </p> </a>
+        </div> 
+    </section>
+
+    <!-- Task 2 -->
+    <section id="lab5_formatting">
+        <h1>Example of Formatting Tags</h1>
+        <p id="F1">text1</p>
+        <p id="F2">text2</p>
+        <p id="F3">text3</p>
+        <p id="F4">text4</p>
+        <p > <span id="F5"> text5 </span> </p>
+    </section>
+
+    <!-- Task 3 -->
+    <section id="lab5_listing">
+        <h2>Saudi Aribia, Najd provinces</h2>
+        <ul>
+            <li> Qassim province
+                <ul>
+                    <li> Buraidah</li>
+                    <li> Onaizah</li>
+                    <li> Ar-Rass</li>
+                </ul>
+            </li>
+
+            <li> Hail province
+                <ul>
+                    <li> Hail</li>
+                    <li> Al-Shinan</li>
+                    <li> Mawqaq </li>
+                </ul>
+            </li>
+
+            <li> Riyadh province 
+                <ul>
+                    <li> Riyadh</li>
+                    <li> Shaqra</li>
+                    <li> Al-Dwadmi </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Task 4 -->
+    <section id="lab5_tables">
+        <h2>Websites languages</h2>
+        <table border="1" class="framework-table">
+            <tr>
+                <th class="table-header" colspan="2">Language and Frameworks</th>
+            </tr>
+            <tr>
+                <td class="language">Python</td>
+                <td class="framework">Django</td>
+            </tr>
+            <tr>
+                <td class="language" rowspan="2">JavaScript</td>
+                <td class="framework">React.js</td>
+            </tr>
+            <tr>
+                <td class="framework">Vue.js</td>
+            </tr>
+            <tr>
+                <td class="language">Ruby</td>
+                <td class="framework">Ruby on Rails</td>
+            </tr>
+    
+        </table>
+    </section>
+
+</body>
+</div>
+</html>
