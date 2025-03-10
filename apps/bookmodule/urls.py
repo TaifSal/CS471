@@ -13,6 +13,9 @@ urlpatterns = [
     path('<int:bookId>/', views.viewbook, name="books.view_one_book"),
     path('about_us/', views.about_us, name="books.about_us"),
     #lab 5
-    path('lab5/', views.lab5, name='books.lab5')
+    path('lab5/', views.lab5, name='books.lab5'),
+    #lab 6
+    path('search/', views.search, name='books.search'),
+    path('filterbooks/', views.filterbooks, name='books.filterbooks')
 ]
 

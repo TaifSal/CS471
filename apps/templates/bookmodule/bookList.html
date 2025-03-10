@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Search result {% endblock title %}
+ 
+{% block content %}
+<!-- Lab-6-->
+<h1> List Books </h1>
+{% if books %}
+<table border>
+    <tr>
+        <td> ID </td>
+        <td> Title </td>
+        <td> Author </td>
+    </tr>
+{% for i in books %}
+<tr>
+    <td> {{i.id}}</td>
+    <td> {{i.title}}</td>
+    <td> {{i.author}}</td>
+</tr>
+{% endfor s%}
+{% else %}
+<p> No book is found </p>
+{% endif %}
+</table>
+
+{% endblock content %}
