@@ -3,7 +3,7 @@
 {% block title %} Search result {% endblock title %}
  
 {% block content %}
-<!-- Lab-6-->
+<!-- Lab-6 and 7 since they share the object name books-->
 <h1> List Books </h1>
 {% if books %}
 <table border>
@@ -11,17 +11,23 @@
         <td> ID </td>
         <td> Title </td>
         <td> Author </td>
+        <td> Price </td>
+        <td> edition </td>
     </tr>
 {% for i in books %}
 <tr>
     <td> {{i.id}}</td>
     <td> {{i.title}}</td>
     <td> {{i.author}}</td>
+    <td> {{i.price}}</td>
+    <td> {{i.edition}}</td>
 </tr>
 {% endfor s%}
 {% else %}
 <p> No book is found </p>
 {% endif %}
 </table>
+
+
 
 {% endblock content %}

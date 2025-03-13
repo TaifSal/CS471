@@ -1,7 +1,6 @@
 from django.urls import path
 from .import views
 
-
 urlpatterns = [
     #lab 3
     path('', views.index),
@@ -16,6 +15,9 @@ urlpatterns = [
     path('lab5/', views.lab5, name='books.lab5'),
     #lab 6
     path('search/', views.search, name='books.search'),
-    path('filterbooks/', views.filterbooks, name='books.filterbooks')
+    path('filterbooks/', views.filterbooks, name='books.filterbooks'),
+    # lab 7
+    path('simple/query', views.simple_query, name='simple_query'),
+    path('complex/query', views.complex_query, name='complex_query'),
 ]
 

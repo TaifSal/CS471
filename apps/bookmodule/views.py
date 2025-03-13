@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+# lab -7 
+from .models import Book
 
 def index2(request, val1=0):
    return render(request, "bookmodule/index2.html", {"value": val1})
@@ -60,6 +62,22 @@ def filterbooks(request):
         return render(request, 'bookmodule/bookList.html', {'books':newBooks})
     return render(request,'bookmodule/search.html')
 
+#lab 7
+def simple_query(request):
+    mybooks=Book.objects.filter(title__icontains='and') # <- multiple objects
+    return render(request, 'bookmodule/bookList.html', {'books':mybooks})
+
+def complex_query(request):
+    mybooks = Book.objects.filter(
+        author__isnull=False,  # Ensures author is not null
+        title__icontains='the',  # Filters books with 'and' in title
+        edition__gte=2,  # Selects books with edition >= 2
+        price__lte=100 , # Excludes books with price <= 100
+    )[:10]  # Limits results to 10 books
+    if mybooks.exists():
+        return render(request, 'bookmodule/bookList.html', {'books': mybooks})
+    else:
+        return render(request, 'bookmodule/index.html')
 
 
 # lab-3
