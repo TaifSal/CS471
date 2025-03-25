@@ -1,0 +1,56 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}  Django Models {% endblock title %}
+{% block content %}
+    <h1>Lab 8 - Django Models </h1>
+
+    <!-- Task 1 -->
+    <h2> Books with Price ≤ 30</h2>
+    <ul>
+        {% for book in task1_books %}
+            <li>{{ book.title }} - ${{ book.price }}</li>
+        {% empty %}
+            <li>No books found.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Task 2 -->
+    <h2>Task 2: Books with Editions > 2 and Title/Author contains "qu"</h2>
+    <ul>
+        {% for book in task2_books %}
+            <li>{{ book.title }} - {{ book.author }} (Edition: {{ book.edition }})</li>
+        {% empty %}
+            <li>No books found.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Task 3 -->
+    <h2>Task 3: Books with Editions ≤ 2 and Title/Author NOT containing "qu"</h2>
+    <ul>
+        {% for book in task3_books %}
+            <li>{{ book.title }} - {{ book.author }} (Edition: {{ book.edition }})</li>
+        {% empty %}
+            <li>No books found.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Task 4 -->
+    <h2>Task 4: Books Ordered by Title</h2>
+    <ul>
+        {% for book in task4_books %}
+            <li>{{ book.title }}</li>
+        {% empty %}
+            <li>No books found.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Task 5 -->
+    <h2>Task 5: Book Statistics</h2>
+    <p>Total Books: {{ book_stats.total_books }}</p>
+    <p>Total Price: ${{ book_stats.total_price }}</p>
+    <p>Average Price: ${{ book_stats.avg_price }}</p>
+    <p>Max Price: ${{ book_stats.max_price }}</p>
+    <p>Min Price: ${{ book_stats.min_price }}</p>
+
+ 
+{% endblock content %}

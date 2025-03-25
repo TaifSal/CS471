@@ -19,5 +19,8 @@ urlpatterns = [
     # lab 7
     path('simple/query', views.simple_query, name='simple_query'),
     path('complex/query', views.complex_query, name='complex_query'),
+    #lab 8
+    path('lab8', views.models_lab8, name='lab8'),  
+
 ]
 
