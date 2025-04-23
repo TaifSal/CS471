@@ -21,6 +21,8 @@ urlpatterns = [
     path('complex/query', views.complex_query, name='complex_query'),
     #lab 8
     path('lab8', views.models_lab8, name='lab8'),  
+    #lab 9 
+    path('lab9', views.models_lab9, name='lab9'),
 
 ]
 

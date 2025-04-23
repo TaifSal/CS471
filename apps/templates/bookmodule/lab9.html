@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}  Django Models {% endblock title %}
+{% block content %}
+
+    <h1>Lab 9 - Django Models</h1>
+    <!-- task 2-->
+    <h2>Publishers with Book Stock Count</h2>
+    <ul>
+        {% for pub in publishers_with_stock %}
+            <li>{{ pub.name }} - {{ pub.stock_counter }} books</li>
+        {% endfor %}
+    </ul>
+    <!-- task 3-->
+    <h2>Oldest Book Publication Date</h2>
+    <p>Oldest publication date: {{ oldest_pubdate.oldest_pubdate }}</p>
+    <!-- task 4-->
+    <h2> Average Book Price per Publisher</h2>
+    <ul>
+        {% for pub in publishers_with_avg_price %}
+            <li>{{ pub.name }} - Average Price: ${{ pub.avg_price|floatformat:2 }}</li>
+        {% endfor %}
+    </ul>
+    <!-- task 5-->
+    <h2>Book Count per Publisher (Price > $50)</h2>
+    <ul>
+        {% for pub in publishers_book_count_filtered %}
+            <li>{{ pub.name }} - Books over $50: {{ pub.book_count }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

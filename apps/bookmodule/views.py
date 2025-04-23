@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from .models import Book
 # lab-8 
 from django.db.models import Q, Count, Sum, Avg, Max, Min
+# lab 9 
+from .models import Publisher, Book9, Author
 
 
 def index2(request, val1=0):
@@ -112,6 +114,29 @@ def models_lab8(request):
         'task4_books': task4_books,
         'book_stats': book_stats,
     })
+
+def models_lab9(request):
+     #task 2: 
+    publishers_with_stock = Publisher.objects.annotate(stock_counter=Count('book9'))
+
+    #task 3: 
+    oldest_pubdate = Publisher.objects.aggregate(oldest_pubdate=Min('book9__pubdate'))
+
+    #task 4: 
+    publishers_with_avg_price = Publisher.objects.annotate(avg_price=Avg('book9__price'))
+
+    #task 5: 
+    publishers_book_count_filtered = Publisher.objects.annotate(
+        book_count=Count('book9', filter=Q(book9__price__gt=50))
+    )
+    context = {
+        'publishers_with_stock': publishers_with_stock,
+        'oldest_pubdate': oldest_pubdate,
+        'publishers_with_avg_price': publishers_with_avg_price,
+        'publishers_book_count_filtered': publishers_book_count_filtered,
+    }
+
+    return render(request, 'bookmodule/lab9.html', context)
 
 
 # lab-3
