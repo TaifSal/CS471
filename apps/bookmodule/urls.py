@@ -23,6 +23,16 @@ urlpatterns = [
     path('lab8', views.models_lab8, name='lab8'),  
     #lab 9 
     path('lab9', views.models_lab9, name='lab9'),
+    #lab 10 -1
+    path('lab10/listbooks', views.list_books, name='list_books'),
+    path('books/lab10/addbook', views.add_book, name='add_book'),
+    path('books/lab10/editbook/<int:id>', views.edit_book, name='edit_book'),
+    path('books/lab10/deletebook/<int:id>', views.delete_book, name='delete_book'),
+    #lab 10 -2 
+    path('lab10/form/listbooks', views.list_books_form, name='list_books_form'),
+    path('lab10/form/addbook', views.add_book_form, name='add_book_form'),
+    path('lab10/form/editbook/<int:id>', views.edit_book_form, name='edit_book_form'),
+    path('lab10/form/deletebook/<int:id>', views.delete_book_form, name='delete_book_form'),
 
 ]
 

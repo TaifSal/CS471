@@ -1,0 +1,110 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}  Forms  {% endblock title %}
+{% block content %}
+
+
+<!-- task 1-->
+{% if mode == "list" %}
+<h1>Lab10 -  HTML Form  </h1>
+  <h2>Books List</h2>
+  <a href="{% url 'add_book' %}">Add Book</a>
+  <ul>
+    {% for book in books %}
+      <li>
+        {{ book.title }} - {{ book.author.fullname }}
+        <a href="{% url 'edit_book' book.id %}">Edit</a>
+        <a href="{% url 'delete_book' book.id %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+<!-- task 2-->
+{% elif mode == "add" %}
+<h1>Lab10 -  HTML Form  </h1>
+  <h2>Add Book</h2>
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Title"><br>
+    <input type="text" name="price" placeholder="Price"><br>
+    <input type="number" name="edition" placeholder="Edition"><br>
+    <input type="text" name="author_name" placeholder="Author Full Name"><br>
+    <button type="submit">Add</button>
+  </form>
+
+<!-- task 3-->
+{% elif mode == "edit" %}
+<h1>Lab10 -  HTML Form  </h1>
+<h2>Edit Book</h2>
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="title" value="{{ book.title }}"><br>
+  <input type="text" name="price" value="{{ book.price }}"><br>
+  <input type="number" name="edition" value="{{ book.edition }}"><br>
+  <input type="text" name="author_name" value="{{ book.author.name }}" placeholder="Author Full Name"><br>
+  <button type="submit">Update</button>
+</form>
+
+
+<!-- task 4-->
+{% elif mode == "delete" %}
+<h1>Lab10 -  HTML Form  </h1>
+<h2>Delete Book</h2>
+<p>Are you sure you want to delete "{{ book.title }}"?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Yes, Delete</button>
+</form>
+
+
+<!-- task 1-2 -->
+{% elif mode == "list_form" %}
+<h1>Lab10 -  Django Form  </h1>
+  <h2>Books List (Form)</h2>
+  <a href="{% url 'add_book_form' %}">Add Book</a>
+  <ul>
+    {% for book in books %}
+      <li>
+        {{ book.title }} - {{ book.author.fullname }}
+        <a href="{% url 'edit_book_form' book.id %}">Edit</a>
+        <a href="{% url 'delete_book_form' book.id %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+
+<!-- task 2 -2 -->
+{% elif mode == "add_form" %}
+<h1>Lab10 -  Django Form  </h1>
+  <h2>Add Book (Using Django Form)</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add</button>
+  </form>
+
+
+<!-- task 3 -2 -->
+{% elif mode == "edit_form" %}
+<h1>Lab10 -  Django Form  </h1>
+  <h2>Edit Book (Using Django Form)</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+
+
+<!-- task 4 -2 -->
+{% elif mode == "delete_form" %}
+<h1>Lab10 -  Django Form  </h1>
+  <h2>Delete Book (Using Form)</h2>
+  <p>Are you sure you want to delete "{{ book.title }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+  </form>
+
+
+{% endif %}
+{% endblock content %}

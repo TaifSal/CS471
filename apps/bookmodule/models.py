@@ -26,6 +26,8 @@ class Publisher(models.Model):
 
 class Author(models.Model):
     name = models.CharField(max_length = 300)
+    def __str__(self):
+        return self.name 
 
 class Book9(models.Model): 
     title = models.CharField (max_length= 50)
@@ -33,7 +35,17 @@ class Book9(models.Model):
     rating = models.SmallIntegerField(default = 1)
     pubdate = models.DateTimeField(default=timezone.now)
     authors = models.ManyToManyField(Author) 
-    publisher = models.ForeignKey(Publisher, on_delete= models.SET_NULL, null=True)
+    publisher = models.ForeignKey(Publisher, on_delete= models.CASCADE, null=True)
     class Meta:
         ordering = ['title']
+
+# lab 10
+class Book10(models.Model):
+    title = models.CharField(max_length=255)
+    author = models.ForeignKey('Author', on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    edition = models.IntegerField()
+
+    def __str__(self):
+        return self.title
 

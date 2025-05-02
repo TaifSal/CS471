@@ -5,8 +5,10 @@ from .models import Book
 # lab-8 
 from django.db.models import Q, Count, Sum, Avg, Max, Min
 # lab 9 
-from .models import Publisher, Book9, Author
-
+from .models import Publisher, Book9, Author, Book10
+#lab 10
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import BookForm
 
 def index2(request, val1=0):
    return render(request, "bookmodule/index2.html", {"value": val1})
@@ -20,6 +22,13 @@ def viewbook(request, bookId):
     if book2['id'] == bookId: targetBook = book2
     context = {'book':targetBook} # book is the variable name accessible by the template
     return render(request, 'bookmodule/show.html', context)
+
+
+# lab-3
+#def index(request):
+#    name = request.GET.get("name") or "world!"
+#    return render(request, "bookmodule/index.html" , {"name": name})
+
 
 ### Lab-4
 def index(request):
@@ -115,6 +124,7 @@ def models_lab8(request):
         'book_stats': book_stats,
     })
 
+#lab 9
 def models_lab9(request):
      #task 2: 
     publishers_with_stock = Publisher.objects.annotate(stock_counter=Count('book9'))
@@ -139,7 +149,86 @@ def models_lab9(request):
     return render(request, 'bookmodule/lab9.html', context)
 
 
-# lab-3
-#def index(request):
-#    name = request.GET.get("name") or "world!"
-#    return render(request, "bookmodule/index.html" , {"name": name})
+#lab 10 
+def list_books(request): # task 1 -1
+    books = Book10.objects.all()
+    return render(request, 'bookmodule/lab10.html', {'books': books, 'mode': 'list'})
+
+
+def add_book(request): # taskk 2 -1
+
+    if request.method == 'POST':
+        title = request.POST['title']
+        price = request.POST['price']
+        edition = request.POST['edition']
+        author_name = request.POST['author_name']
+        
+        author, created = Author.objects.get_or_create(name=author_name)
+
+        Book10.objects.create(title=title, price=price, edition=edition, author=author)
+        return redirect('list_books')
+
+    return render(request, 'bookmodule/lab10.html', {'mode': 'add'})
+
+
+
+def edit_book(request, id): # task 3- 1
+    book = get_object_or_404(Book10, id=id)
+    if request.method == 'POST':
+        book.title = request.POST['title']
+        book.price = request.POST['price']
+        book.edition = request.POST['edition']
+        author_name = request.POST['author_name'].strip().title()
+        author, _ = Author.objects.get_or_create(name=author_name)
+        book.author = author
+        book.save()
+        return redirect('list_books')
+    authors = Author.objects.all()
+    return render(request, 'bookmodule/lab10.html', {'book': book, 'authors': authors, 'mode': 'edit'})
+
+
+def delete_book(request, id): # task 4-1
+    book = get_object_or_404(Book10, id=id)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('list_books')
+    return render(request, 'bookmodule/lab10.html', {'book': book, 'mode': 'delete'})
+
+
+# ----
+
+
+def list_books_form(request): # task 1-2 
+    books = Book10.objects.all()
+    return render(request, 'bookmodule/lab10.html', {'books': books, 'mode': 'list_form'})
+
+
+def add_book_form(request): # task 2 -2
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_books_form')
+    else:
+        form = BookForm()
+    return render(request, 'bookmodule/lab10.html', {'form': form, 'mode': 'add_form'})
+
+
+def edit_book_form(request, id): # task 3-2
+    book = get_object_or_404(Book10, id=id)
+    form = BookForm(request.POST or None, instance=book)
+    if form.is_valid():
+        form.save()
+        return redirect('list_books_form')
+    return render(request, 'bookmodule/lab10.html', {'form': form, 'mode': 'edit_form'})
+
+
+def delete_book_form(request, id): #task 4-4
+    book = get_object_or_404(Book10, id=id)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('list_books_form')
+    return render(request, 'bookmodule/lab10.html', {'book': book, 'mode': 'delete_form'})
+
+
+
