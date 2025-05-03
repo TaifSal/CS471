@@ -2,11 +2,11 @@ from django.db import models
 from django.utils import timezone 
 
 # lab-7
-class Book(models.Model):
-    title = models.CharField(max_length = 50)
-    author = models.CharField(max_length = 50)
-    price = models.FloatField(default = 0.0)
-    edition = models.SmallIntegerField(default = 1)
+#class Book(models.Model):
+#    title = models.CharField(max_length = 50)
+#    author = models.CharField(max_length = 50)
+#    price = models.FloatField(default = 0.0)
+#    edition = models.SmallIntegerField(default = 1)
 
 # lab-8
 class Book(models.Model):
@@ -49,3 +49,34 @@ class Book10(models.Model):
     def __str__(self):
         return self.title
 
+
+# lab 11 
+# Task 1
+class Author11(models.Model):
+    fullname = models.CharField(max_length=100, null=False)
+    address = models.TextField(max_length=500, null=True)
+    
+    def __str__(self):
+        return self.fullname
+
+class Book11(models.Model):
+    title = models.CharField(max_length=100, null=False)
+    price = models.FloatField(default=0)
+    edition = models.IntegerField(default=1)
+    authors = models.ManyToManyField(Author11)
+    
+    def __str__(self):
+        return self.title
+
+
+# Task 2
+class BookWithCover(models.Model):
+    title = models.CharField(max_length=100, null=False)
+    price = models.FloatField(default=0)
+    edition = models.IntegerField(default=1)
+    authors = models.ManyToManyField(Author11)
+    cover_page = models.ImageField(upload_to='book_covers/', null=True, blank=True)
+    
+    def __str__(self):
+        return self.title
+    

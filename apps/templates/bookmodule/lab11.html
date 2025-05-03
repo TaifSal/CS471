@@ -1,0 +1,238 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}Lab 11 - Django Forms-2{% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock stylesheets %}
+
+{% block content %}
+<!-- task 1 -->
+<div class="container">
+    <h1>Lab 11 - Django Forms-2</h1>
+    
+    <div class="nav-links">
+        <a href="{% url 'list_authors' %}">Authors List</a>
+        <a href="{% url 'add_author' %}">Add New Author</a>
+        <a href="{% url 'list_books_lab11' %}">Books List (Task 1)</a>
+        <a href="{% url 'add_book_lab11' %}">Add New Book (Task 1)</a>
+        <a href="{% url 'list_books_with_cover' %}">Books with Cover (Task 2)</a>
+        <a href="{% url 'add_book_with_cover' %}">Add Book with Cover (Task 2)</a>
+    </div>
+
+
+    {% if mode == 'add_author' %}
+    <div class="section">
+        <h2>Add New Author</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Add Author</button>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if mode == 'list_authors' %}
+    <div class="section">
+        <h2>Authors List</h2>
+        {% if authors %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in authors %}
+                <tr>
+                    <td>{{ author.id }}</td>
+                    <td>{{ author.fullname }}</td>
+                    <td>{{ author.address }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No authors available. <a href="{% url 'add_author' %}">Add an author</a>.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if mode == 'list_books' %}
+    <div class="section">
+        <h2>Books List (Task 1: Many-to-Many)</h2>
+        {% if books %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Edition</th>
+                    <th>Authors</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>${{ book.price }}</td>
+                    <td>{{ book.edition }}</td>
+                    <td>
+                        {% for author in book.authors.all %}
+                            {{ author.fullname }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_book_lab11' book.id %}" class="btn">Edit</a>
+                        <a href="{% url 'delete_book_lab11' book.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No books available. <a href="{% url 'add_book_lab11' %}">Add a book</a>.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if mode == 'add_book' %}
+    <div class="section">
+        <h2>Add New Book </h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Add Book</button>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if mode == 'edit_book' %}
+    <div class="section">
+        <h2>Edit Book </h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Update Book</button>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if mode == 'delete_book' %}
+    <div class="section">
+        <h2>Delete Book</h2>
+        <p>Are you sure you want to delete "{{ book.title }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            <a href="{% url 'list_books_lab11' %}" class="btn">Cancel</a>
+        </form>
+    </div>
+    {% endif %}
+
+    <!-- task 2-->
+    {% if mode == 'list_books_with_cover' %}
+    <div class="section">
+        <h2>Books with Cover </h2>
+        {% if books %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cover</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Edition</th>
+                    <th>Authors</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>
+                        {% if book.cover_page %}
+                        <img src="{{ book.cover_page.url }}" alt="{{ book.title }} cover" class="book-cover" style="width: 200px; height: auto;">
+                        {% else %}
+                        No cover
+                        {% endif %}
+                    </td>
+                    <td>{{ book.title }}</td>
+                    <td>${{ book.price }}</td>
+                    <td>{{ book.edition }}</td>
+                    <td>
+                        {% for author in book.authors.all %}
+                            {{ author.fullname }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_book_with_cover' book.id %}" class="btn">Edit</a>
+                        <a href="{% url 'delete_book_with_cover' book.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No books with covers available. <a href="{% url 'add_book_with_cover' %}">Add a book with cover</a>.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if mode == 'add_book_with_cover' %}
+    <div class="section">
+        <h2>Add Book with Cover </h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Add Book with Cover</button>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if mode == 'edit_book_with_cover' %}
+    <div class="section">
+        <h2>Edit Book with Cover </h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Update Book</button>
+        </form>
+        {% if book.cover_page %}
+        <div class="form-group">
+            <label>Current Cover:</label>
+            <img src="{{ book.cover_page.url }}" alt="{{ book.title }} cover" class="book-cover" style="width: 200px; height: auto;">
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if mode == 'delete_book_with_cover' %}
+    <div class="section">
+        <h2>Delete Book with Cover</h2>
+        <p>Are you sure you want to delete "{{ book.title }}"?</p>
+        {% if book.cover_page %}
+        <img src="{{ book.cover_page.url }}" alt="{{ book.title }} cover" class="book-cover" style="width: 200px; height: auto;">
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            <a href="{% url 'list_books_with_cover' %}" class="btn">Cancel</a>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

@@ -1,14 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-# lab -7 
-from .models import Book
-# lab-8 
-from django.db.models import Q, Count, Sum, Avg, Max, Min
-# lab 9 
-from .models import Publisher, Book9, Author, Book10
-#lab 10
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import BookForm
+from django.http import HttpResponse
+from django.db.models import Q, Count, Sum, Avg, Max, Min
+# from .models import Book, Book9, Book10, Author, Publisher 
+from .models import Book10, Book11, Author11, BookWithCover
+from .forms import BookForm, Book11Form, BookWithCoverForm
+
 
 def index2(request, val1=0):
    return render(request, "bookmodule/index2.html", {"value": val1})
@@ -230,5 +226,97 @@ def delete_book_form(request, id): #task 4-4
         return redirect('list_books_form')
     return render(request, 'bookmodule/lab10.html', {'book': book, 'mode': 'delete_form'})
 
+
+# lab 11 - 
+# Task 1
+def list_books_lab11(request):
+    books = Book11.objects.all()
+    return render(request, 'bookmodule/lab11.html', {'books': books, 'mode': 'list_books'})
+
+
+def add_book_lab11(request):
+    if request.method == 'POST':
+        form = Book11Form(request.POST)
+        if form.is_valid():
+            book = form.save(commit=False)  
+            book.save()
+            form.save_m2m()
+            return redirect('list_books_lab11')
+    else:
+        form = Book11Form()
+    return render(request, 'bookmodule/lab11.html', {'form': form, 'mode': 'add_book'})
+
+def edit_book_lab11(request, book_id):
+    book = get_object_or_404(Book11, id=book_id)
+    if request.method == 'POST':
+        form = Book11Form(request.POST, instance=book)
+        if form.is_valid():
+            book = form.save(commit=False)  
+            book.save()
+            form.save_m2m()
+            return redirect('list_books_lab11')
+    else:
+        form = Book11Form(instance=book)
+    return render(request, 'bookmodule/lab11.html', {'form': form, 'book': book, 'mode': 'edit_book'})
+
+def delete_book_lab11(request, book_id):
+    book = get_object_or_404(Book11, id=book_id)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('list_books_lab11')
+    return render(request, 'bookmodule/lab11.html', {'book': book, 'mode': 'delete_book'})
+
+# Task 2
+def list_books_with_cover(request):
+    books = BookWithCover.objects.all()
+    return render(request, 'bookmodule/lab11.html', {'books': books, 'mode': 'list_books_with_cover'})
+
+def add_book_with_cover(request):
+    if request.method == 'POST':
+        form = BookWithCoverForm(request.POST, request.FILES)
+        if form.is_valid():
+            book = form.save(commit=False)  
+            book.save()
+            form.save_m2m()
+            return redirect('list_books_with_cover')
+    else:
+        form = BookWithCoverForm()
+    return render(request, 'bookmodule/lab11.html', {'form': form, 'mode': 'add_book_with_cover'})
+
+def edit_book_with_cover(request, book_id):
+    book = get_object_or_404(BookWithCover, id=book_id)
+    if request.method == 'POST':
+        form = BookWithCoverForm(request.POST, request.FILES, instance=book)
+        if form.is_valid():
+            book = form.save(commit=False)  
+            book.save()
+            form.save_m2m()
+            return redirect('list_books_with_cover')
+    else:
+        form = BookWithCoverForm(instance=book)
+    return render(request, 'bookmodule/lab11.html', {'form': form, 'book': book, 'mode': 'edit_book_with_cover'})
+
+def delete_book_with_cover(request, book_id):
+    book = get_object_or_404(BookWithCover, id=book_id)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('list_books_with_cover')
+    return render(request, 'bookmodule/lab11.html', {'book': book, 'mode': 'delete_book_with_cover'})
+
+# Add authors view
+def add_author(request):
+    if request.method == 'POST':
+        fullname = request.POST.get('fullname')
+        address = request.POST.get('address')
+        Author11.objects.create(fullname=fullname, address=address)
+        return redirect('list_authors')
+    return render(request, 'bookmodule/lab11.html', {'mode': 'add_author'})
+
+def list_authors(request):
+    authors = Author11.objects.all()
+    return render(request, 'bookmodule/lab11.html', {'authors': authors, 'mode': 'list_authors'})
+
+def lab11_index(request):
+    return render(request, 'bookmodule/lab11.html', {'mode': 'index'})
 
 

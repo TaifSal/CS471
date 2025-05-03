@@ -1,5 +1,7 @@
-from django.urls import path
+from django.urls import path, include
 from .import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     #lab 3
@@ -33,6 +35,20 @@ urlpatterns = [
     path('lab10/form/addbook', views.add_book_form, name='add_book_form'),
     path('lab10/form/editbook/<int:id>', views.edit_book_form, name='edit_book_form'),
     path('lab10/form/deletebook/<int:id>', views.delete_book_form, name='delete_book_form'),
+    # lab 11 - 1
+    path('lab11/form/addbook', views.add_book_lab11, name='add_book_lab11'),
+    path('lab11/form/listbooks', views.list_books_lab11, name='list_books_lab11'),
+    path('lab11/form/editbook/<int:book_id>', views.edit_book_lab11, name='edit_book_lab11'),
+    path('lab11/form/deletebook/<int:book_id>', views.delete_book_lab11, name='delete_book_lab11'),
 
+    # lab-11-2 (if you have file upload views too)
+    path('lab11/form/addbookcover', views.add_book_with_cover, name='add_book_with_cover'),
+    path('lab11/form/listbookscover', views.list_books_with_cover, name='list_books_with_cover'),
+    path('lab11/form/editbookcover/<int:book_id>', views.edit_book_with_cover, name='edit_book_with_cover'),
+    path('lab11/form/deletebookcover/<int:book_id>', views.delete_book_with_cover, name='delete_book_with_cover'),
+    
+    # lab 11 - Author management
+    path('lab11/add_author/', views.add_author, name='add_author'),
+    path('lab11/list_authors/', views.list_authors, name='list_authors'),
 ]
 
