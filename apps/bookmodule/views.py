@@ -4,6 +4,7 @@ from django.db.models import Q, Count, Sum, Avg, Max, Min
 # from .models import Book, Book9, Book10, Author, Publisher 
 from .models import Book10, Book11, Author11, BookWithCover
 from .forms import BookForm, Book11Form, BookWithCoverForm
+from django.contrib.auth.decorators import login_required
 
 
 def index2(request, val1=0):
@@ -229,11 +230,13 @@ def delete_book_form(request, id): #task 4-4
 
 # lab 11 - 
 # Task 1
+@login_required(login_url='login')
 def list_books_lab11(request):
     books = Book11.objects.all()
     return render(request, 'bookmodule/lab11.html', {'books': books, 'mode': 'list_books'})
 
 
+@login_required(login_url='login')
 def add_book_lab11(request):
     if request.method == 'POST':
         form = Book11Form(request.POST)
@@ -246,6 +249,8 @@ def add_book_lab11(request):
         form = Book11Form()
     return render(request, 'bookmodule/lab11.html', {'form': form, 'mode': 'add_book'})
 
+
+@login_required(login_url='login')
 def edit_book_lab11(request, book_id):
     book = get_object_or_404(Book11, id=book_id)
     if request.method == 'POST':
@@ -259,6 +264,8 @@ def edit_book_lab11(request, book_id):
         form = Book11Form(instance=book)
     return render(request, 'bookmodule/lab11.html', {'form': form, 'book': book, 'mode': 'edit_book'})
 
+
+@login_required(login_url='login')
 def delete_book_lab11(request, book_id):
     book = get_object_or_404(Book11, id=book_id)
     if request.method == 'POST':
@@ -266,11 +273,15 @@ def delete_book_lab11(request, book_id):
         return redirect('list_books_lab11')
     return render(request, 'bookmodule/lab11.html', {'book': book, 'mode': 'delete_book'})
 
+
 # Task 2
+@login_required(login_url='login')
 def list_books_with_cover(request):
     books = BookWithCover.objects.all()
     return render(request, 'bookmodule/lab11.html', {'books': books, 'mode': 'list_books_with_cover'})
 
+
+@login_required(login_url='login')
 def add_book_with_cover(request):
     if request.method == 'POST':
         form = BookWithCoverForm(request.POST, request.FILES)
@@ -283,6 +294,8 @@ def add_book_with_cover(request):
         form = BookWithCoverForm()
     return render(request, 'bookmodule/lab11.html', {'form': form, 'mode': 'add_book_with_cover'})
 
+
+@login_required(login_url='login')
 def edit_book_with_cover(request, book_id):
     book = get_object_or_404(BookWithCover, id=book_id)
     if request.method == 'POST':
@@ -296,6 +309,7 @@ def edit_book_with_cover(request, book_id):
         form = BookWithCoverForm(instance=book)
     return render(request, 'bookmodule/lab11.html', {'form': form, 'book': book, 'mode': 'edit_book_with_cover'})
 
+@login_required(login_url='login')
 def delete_book_with_cover(request, book_id):
     book = get_object_or_404(BookWithCover, id=book_id)
     if request.method == 'POST':
@@ -303,20 +317,8 @@ def delete_book_with_cover(request, book_id):
         return redirect('list_books_with_cover')
     return render(request, 'bookmodule/lab11.html', {'book': book, 'mode': 'delete_book_with_cover'})
 
-# Add authors view
-def add_author(request):
-    if request.method == 'POST':
-        fullname = request.POST.get('fullname')
-        address = request.POST.get('address')
-        Author11.objects.create(fullname=fullname, address=address)
-        return redirect('list_authors')
-    return render(request, 'bookmodule/lab11.html', {'mode': 'add_author'})
 
-def list_authors(request):
-    authors = Author11.objects.all()
-    return render(request, 'bookmodule/lab11.html', {'authors': authors, 'mode': 'list_authors'})
 
-def lab11_index(request):
-    return render(request, 'bookmodule/lab11.html', {'mode': 'index'})
+
 
 

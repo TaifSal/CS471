@@ -47,8 +47,5 @@ urlpatterns = [
     path('lab11/form/editbookcover/<int:book_id>', views.edit_book_with_cover, name='edit_book_with_cover'),
     path('lab11/form/deletebookcover/<int:book_id>', views.delete_book_with_cover, name='delete_book_with_cover'),
     
-    # lab 11 - Author management
-    path('lab11/add_author/', views.add_author, name='add_author'),
-    path('lab11/list_authors/', views.list_authors, name='list_authors'),
 ]
 

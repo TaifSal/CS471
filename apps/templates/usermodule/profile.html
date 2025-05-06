@@ -1,0 +1,28 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Profile {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h2>User Profile</h2>
+    
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Welcome, {{ user.username }}!</h5>
+            <p class="card-text">Email: {{ user.email }}</p>
+            <p class="card-text">Last login: {{ user.last_login }}</p>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
