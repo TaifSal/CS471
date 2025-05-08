@@ -1,0 +1,31 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}Lab 13 - JavaScript {% endblock title %}
+{% block content %}
+<h2>Task 4</h2>
+
+<div id="hoverDiv" style="width: 300px; height: 200px; background-color: lightcoral; border: 1px solid black; 
+padding: 20px; margin: 20px 0; transition: all 0.3s ease;">
+    Hover over this div to see the style change
+</div>
+
+<script>
+    const div = document.getElementById("hoverDiv");
+    const originalBgColor = div.style.backgroundColor;
+    const originalFontSize = div.style.fontSize;
+    
+    div.onmouseover = function() {
+        div.style.backgroundColor = "lightblue";
+        div.style.fontSize = "24px";
+        div.style.fontWeight = "bold";
+        div.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
+    };
+    
+    div.onmouseout = function() {
+        div.style.backgroundColor = originalBgColor;
+        div.style.fontSize = originalFontSize;
+        div.style.fontWeight = "normal";
+        div.style.boxShadow = "none";
+    };
+</script>
+{% endblock %}

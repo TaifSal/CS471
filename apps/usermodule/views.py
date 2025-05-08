@@ -40,12 +40,13 @@ def login_view(request):
     return render(request, 'usermodule/login.html', {'form': form})
 
 # task 3
+@login_required(login_url='login')
+def profile(request):
+    return render(request, "usermodule/profile.html")
+
+
+# task 4
 def logout_view(request):
     auth_logout(request)
     messages.info(request, 'You have been logged out successfully.')
     return redirect('login')
-
-# task 4
-@login_required(login_url='login')
-def profile(request):
-    return render(request, "usermodule/profile.html")

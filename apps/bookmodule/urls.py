@@ -47,5 +47,11 @@ urlpatterns = [
     path('lab11/form/editbookcover/<int:book_id>', views.edit_book_with_cover, name='edit_book_with_cover'),
     path('lab11/form/deletebookcover/<int:book_id>', views.delete_book_with_cover, name='delete_book_with_cover'),
     
+    # lab 13
+    path('lab12/task1', views.lab12_task1, name='lab12_task1'),
+    path('lab12/task2', views.lab12_task2, name='lab12_task2'),
+    path('lab12/task3', views.lab12_task3, name='lab12_task3'),
+    path('lab12/task4', views.lab12_task4, name='lab12_task4'),
+    path('lab12/task5', views.lab12_task5, name='lab12_task5'),
 ]
 

@@ -318,6 +318,21 @@ def delete_book_with_cover(request, book_id):
     return render(request, 'bookmodule/lab11.html', {'book': book, 'mode': 'delete_book_with_cover'})
 
 
+#lab 13
+def lab12_task1(request):
+    return render(request, 'bookmodule/lab12_task1.html')
+
+def lab12_task2(request):
+    return render(request, 'bookmodule/lab12_task2.html')
+
+def lab12_task3(request):
+    return render(request, 'bookmodule/lab12_task3.html')
+
+def lab12_task4(request):
+    return render(request, 'bookmodule/lab12_task4.html')
+
+def lab12_task5(request):
+    return render(request, 'bookmodule/lab12_task5.html')
 
 
 

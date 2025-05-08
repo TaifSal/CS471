@@ -1,0 +1,33 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}Lab 13 - JavaScript {% endblock title %}
+{% block content %}
+<h2>Task 1</h2>
+
+<div id="myDiv" style="width: 300px; height: 200px; background-color: lightblue; border: 1px solid black; padding: 20px; margin: 20px 0;">
+    This is the original text
+</div>
+
+<button id="colorButton">Change Background Color</button>
+<button id="textButton">Change Text</button>
+
+<script>
+    document.getElementById("colorButton").onclick = function() {
+        const div = document.getElementById("myDiv");
+        if (div.style.backgroundColor === "lightblue") {
+            div.style.backgroundColor = "lightgreen";
+        } else {
+            div.style.backgroundColor = "lightblue";
+        }
+    };
+
+    document.getElementById("textButton").onclick = function() {
+        const div = document.getElementById("myDiv");
+        if (div.innerHTML === "This is the original text") {
+            div.innerHTML = "The text has been changed!";
+        } else {
+            div.innerHTML = "This is the original text";
+        }
+    };
+</script>
+{% endblock %}

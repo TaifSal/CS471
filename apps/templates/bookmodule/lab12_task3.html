@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}Lab 13 - JavaScript {% endblock title %}
+{% block content %}
+<h2>Task 3</h2>
+
+<div id="toggleDiv" style="width: 300px; height: 200px; background-color: lightyellow; border: 1px solid black; padding: 20px; margin: 20px 0;">
+    This content can be hidden and shown
+</div>
+
+<button id="toggleButton">Hide Content</button>
+
+<script>
+    document.getElementById("toggleButton").onclick = function() {
+        const div = document.getElementById("toggleDiv");
+        const button = document.getElementById("toggleButton");
+        
+        if (div.style.display === "none") {
+            div.style.display = "block";
+            button.textContent = "Hide Content";
+        } else {
+            div.style.display = "none";
+            button.textContent = "Show Content";
+        }
+    };
+</script>
+{% endblock %}

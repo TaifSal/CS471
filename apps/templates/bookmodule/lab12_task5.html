@@ -1,0 +1,79 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}Lab 13 - JavaScript {% endblock title %}
+{% block content %}
+<h2>Task 5</h2>
+
+<div id="tableContainer"></div>
+
+<script>
+    function createTable() {
+        const table = document.createElement("table");
+        table.style.borderCollapse = "collapse";
+        table.style.width = "100%";
+        table.style.maxWidth = "600px";
+        table.style.margin = "20px 0";
+        
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+        
+        const headers = ["ID", "Book Title", "Author", "Price"];
+        
+        headers.forEach(headerText => {
+            const th = document.createElement("th");
+            th.textContent = headerText;
+            th.style.border = "1px solid #ddd";
+            th.style.padding = "8px";
+            th.style.backgroundColor = "#f2f2f2";
+            headerRow.appendChild(th);
+        });
+        
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+        
+        const tbody = document.createElement("tbody");
+        
+        const books = [
+            { id: 1, title: "A Game of Thrones", author: "George R. R. Martin", price: "$29.99" },
+            { id: 2, title: "A Clash of Kings", author: "George R. R. Martin", price: "$39.99" },
+            { id: 3, title: "A storm of Swords", author: "George R. R. Martin", price: "$24.99" },
+            { id: 4, title: "A Feast for Crows", author: "George R. R. Martin", price: "$35.99" }
+        ];
+        
+        books.forEach(book => {
+            const row = document.createElement("tr");
+            const idCell = document.createElement("td");
+            idCell.textContent = book.id;
+            idCell.style.border = "1px solid #ddd";
+            idCell.style.padding = "8px";
+            row.appendChild(idCell);
+            
+            const titleCell = document.createElement("td");
+            titleCell.textContent = book.title;
+            titleCell.style.border = "1px solid #ddd";
+            titleCell.style.padding = "8px";
+            row.appendChild(titleCell);
+            
+            const authorCell = document.createElement("td");
+            authorCell.textContent = book.author;
+            authorCell.style.border = "1px solid #ddd";
+            authorCell.style.padding = "8px";
+            row.appendChild(authorCell);
+            
+            const priceCell = document.createElement("td");
+            priceCell.textContent = book.price;
+            priceCell.style.border = "1px solid #ddd";
+            priceCell.style.padding = "8px";
+            row.appendChild(priceCell);
+            
+            tbody.appendChild(row);
+        });
+        
+        table.appendChild(tbody);
+        
+        document.getElementById("tableContainer").appendChild(table);
+    }
+    
+    window.onload = createTable;
+</script>
+{% endblock %}
